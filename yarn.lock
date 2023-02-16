@@ -159,6 +159,14 @@ datatables.net-bs@^1.10.15, "datatables.net-bs@https://github.com/DataTables/Dis
     datatables.net-buttons "1.4.2"
     jquery ">=1.7"
 
+"datatables.net-buttons-dt@https://github.com/DataTables/Dist-DataTables-Buttons-DataTables.git#1.4.2":
+  version "1.4.2"
+  resolved "https://github.com/DataTables/Dist-DataTables-Buttons-DataTables.git#c3ff5080edad1d62c9b2f910fcc004c844332efb"
+  dependencies:
+    datatables.net-buttons "1.4.2"
+    datatables.net-dt "^1.10.15"
+    jquery ">=1.7"
+
 datatables.net-buttons@1.4.2, "datatables.net-buttons@https://github.com/DataTables/Dist-DataTables-Buttons.git#1.4.2":
   version "1.4.2"
   resolved "https://github.com/DataTables/Dist-DataTables-Buttons.git#99f12c2e45ad598b0a4442f6fb34720aba9ccc37"
@@ -179,6 +187,14 @@ datatables.net-colreorder@1.4.1, "datatables.net-colreorder@https://github.com/D
   resolved "https://github.com/DataTables/Dist-DataTables-ColReorder.git#5f3b56f03f7f94be48e83b7bb49ab1d14ec0abc0"
   dependencies:
     datatables.net "^1.10.15"
+    jquery ">=1.7"
+
+datatables.net-dt@^1.10.15:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.13.2.tgz#fae827ad0e8b94d835bf68189ce6f97c79283ae2"
+  integrity sha512-+akHG1Up2xd+HiayCO/u94JhNLsVroLPUWAG5t+UPos4OXwg0LVNEYcmy0noy6xJPOt0fP/SJ6GOmHXCU1Opcg==
+  dependencies:
+    datatables.net ">=1.12.1"
     jquery ">=1.7"
 
 "datatables.net-fixedcolumns-bs@https://github.com/DataTables/Dist-DataTables-FixedColumns-Bootstrap.git#3.2.3":
@@ -286,7 +302,7 @@ datatables.net-select@1.2.3, "datatables.net-select@https://github.com/DataTable
     datatables.net "^1.10.15"
     jquery ">=1.7"
 
-datatables.net@1.10.16, datatables.net@^1.10.15, "datatables.net@https://github.com/DataTables/Dist-DataTables.git#1.10.16":
+datatables.net@1.10.16, datatables.net@>=1.12.1, datatables.net@^1.10.15, "datatables.net@https://github.com/DataTables/Dist-DataTables.git#1.10.16":
   version "1.10.16"
   resolved "https://github.com/DataTables/Dist-DataTables.git#795d3f39b73da5bc3656c8ef5425931a55e6ed2e"
   dependencies:
@@ -528,9 +544,9 @@ mkdirp@^0.5.0:
   dependencies:
     minimist "^1.2.5"
 
-"mockup@https://github.com/plone/mockup.git#3.2.8":
-  version "3.2.8"
-  resolved "https://github.com/plone/mockup.git#040cf32498b0826928c4cdab156761685d18aeea"
+"mockup@https://github.com/jazkarta/mockup.git#mtneers-3.x":
+  version "3.2.9"
+  resolved "https://github.com/jazkarta/mockup.git#2d0ee50e84d358bc2b762482625bf1b6d93db320"
   dependencies:
     ace-builds "https://github.com/ajaxorg/ace-builds.git#v1.2.6"
     backbone "https://github.com/jashkenas/backbone.git#1.1.2"
@@ -543,6 +559,7 @@ mkdirp@^0.5.0:
     datatables.net-bs "https://github.com/DataTables/Dist-DataTables-Bootstrap.git#1.10.16"
     datatables.net-buttons "https://github.com/DataTables/Dist-DataTables-Buttons.git#1.4.2"
     datatables.net-buttons-bs "https://github.com/DataTables/Dist-DataTables-Buttons-Bootstrap.git#1.4.2"
+    datatables.net-buttons-dt "https://github.com/DataTables/Dist-DataTables-Buttons-DataTables.git#1.4.2"
     datatables.net-colreorder "https://github.com/DataTables/Dist-DataTables-ColReorder.git#1.4.1"
     datatables.net-colreorder-bs "https://github.com/DataTables/Dist-DataTables-ColReorder-Bootstrap.git#1.4.1"
     datatables.net-fixedcolumns "https://github.com/DataTables/Dist-DataTables-FixedColumns.git#3.2.3"

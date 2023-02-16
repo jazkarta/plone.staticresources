@@ -72,6 +72,11 @@ define([
         if(domain.indexOf('.') !== -1){
           $(this).val('http://' + val);
         }
+        // use backend to convert to resolveuid URL when link is internal
+        var base_url = window.PORTAL_URL || $('body').data('portal-url');
+        $.get(base_url + '/@@make-resolveuid-url', {url: val}, function (data) {
+          $(this).val(data);
+        }.bind(this));
       });
     }
   });
@@ -686,6 +691,15 @@ define([
         e.stopPropagation();
         self.linkType = self.modal.$modal.find('fieldset.active').data('linktype');
 
+        if(self.linkType === 'external') {
+          // use backend to convert to resolveuid URL when link is internal
+          var base_url = window.PORTAL_URL || $('body').data('portal-url');
+          $.get(base_url + '/@@make-resolveuid-url', {url: self.getLinkUrl()}, function (href) {
+            self.updateAnchor(href);
+            self.hide();
+          });
+          return;
+        }
         if(self.linkType === 'uploadImage' || self.linkType === 'upload'){
           var patUpload = self.$upload.data().patternUpload;
           if(patUpload.dropzone.files.length > 0){
@@ -823,6 +837,11 @@ define([
             $('#tinylink-' + self.linkType, self.modal.$modal).trigger('click');
           } else if (src) {
             self.guessImageLink(src);
+          }
+          if (self.linkType !== 'externalImage') {
+            // hide external image unless it's in use
+            $('.autotoc-level-1:last', self.modal.$modal).hide();
+            $('fieldset.externalImage', self.modal.$modal).hide();
           }
           var className = self.dom.getAttrib(self.imgElm, 'class');
           var klasses = className.split(' ');

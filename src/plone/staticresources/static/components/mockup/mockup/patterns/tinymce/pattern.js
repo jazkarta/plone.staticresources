@@ -147,7 +147,7 @@ define([
         imageAlign: _t('Align'),
         scale: _t('Size'),
         alt: _t('Alternative Text'),
-        insertImageHelp: _t('Specify an image. It can be on this site already (Internal Image), an image you upload (Upload), or from an external site (External Image).'),
+        insertImageHelp: _t('Specify an image. It can be on this site already ("Internal Image") or an image you upload ("Upload").'),
         internalImage: _t('Internal Image'),
         externalImage: _t('External Image'),
         externalImageText: _t('External Image URL (can be relative within this site or absolute if it starts with http:// or https://)'),

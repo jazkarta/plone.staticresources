@@ -1,0 +1,10 @@
+{
+    "css": [
+        "css/buttons.dataTables.css",
+        "css/buttons.dataTables.min.css"
+    ],
+    "js": [],
+    "src-repo": "http://github.com/DataTables/Buttons",
+    "last-sync": "533156edef9d49a6c93b2f04a87312f33b31f9dc",
+    "last-tag": "1.4.2"
+}

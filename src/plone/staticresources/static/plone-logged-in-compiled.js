@@ -151,7 +151,8 @@ define('mockup-patterns-inlinevalidation',[
 
         // XXX: Remove binary files so they are not uploaded to server
         $cloned_form.find("input[type=file]").remove();
-        if (fname) {
+        // Don't validate if the form has buttons pressed
+        if (fname && $form.formSerialize().indexOf('form.buttons.') == -1) {
           this.queue($.proxy(function(next) {
               $cloned_form.ajaxSubmit({
                   url: this.append_url_path($cloned_form.attr('action'), '@@z3cform_validate_field'),
@@ -173,24 +174,33 @@ define('mockup-patterns-inlinevalidation',[
     },
 
     init: function () {
-
+      var self = this;
+      var validate_field = $.proxy(function (ev) {
+        if (self.options.type === 'archetypes') {
+          self.validate_archetypes_field(ev.target);
+        } else if (self.options.type === 'z3c.form') {
+          self.validate_z3cform_field(ev.target);
+        } else if (self.options.type === 'formlib') {
+          self.validate_formlib_field(ev.target);
+        }
+      });
       this.$el.find(
-          'input[type="text"], ' +
+          'input[type="text"]:not(.pattern-pickadate-date, .pattern-pickadate-time), ' +
           'input[type="password"], ' +
           'input[type="checkbox"], ' +
           'select, ' +
-          'textarea').on('blur',
+          'textarea').on('blur', validate_field);
 
-          $.proxy(function (ev) {
-            if (this.options.type === 'archetypes') {
-              this.validate_archetypes_field(ev.target);
-            } else if (this.options.type === 'z3c.form') {
-              this.validate_z3cform_field(ev.target);
-            } else if (this.options.type === 'formlib') {
-              this.validate_formlib_field(ev.target);
-            }
-          }, this));
-      },
+      // Special handling for related items pattern
+      this.$el.find('input.pat-relateditems.text-widget').on('change', validate_field);
+
+      // Special handling for date patterns
+      this.$el.find(
+        'input.pattern-pickadate-date, ' +
+        'input.pattern-pickadate-time').on('change', function (ev) {
+          setTimeout(function () {validate_field(ev);}, 200);
+        });
+    },
   });
   return InlineValidation;
 });
@@ -14958,5 +14968,5 @@ require([
   'use strict';
 });
 
-define("/home/_thet/data/dev/plone/buildout.coredev/src/plone.staticresources/src/plone/staticresources/static/plone-logged-in.js", function(){});
+define("/Users/alecmitchell/Development/bundles/mountaineers/src/plone.staticresources/src/plone/staticresources/static/plone-logged-in.js", function(){});
 
