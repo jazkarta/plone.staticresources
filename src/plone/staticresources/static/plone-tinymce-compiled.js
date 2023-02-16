@@ -35127,6 +35127,11 @@ define('mockup-patterns-tinymce-url/js/links',[
         if(domain.indexOf('.') !== -1){
           $(this).val('http://' + val);
         }
+        // use backend to convert to resolveuid URL when link is internal
+        var base_url = window.PORTAL_URL || $('body').data('portal-url');
+        $.get(base_url + '/@@make-resolveuid-url', {url: val}, function (data) {
+          $(this).val(data);
+        }.bind(this));
       });
     }
   });
@@ -35741,6 +35746,15 @@ define('mockup-patterns-tinymce-url/js/links',[
         e.stopPropagation();
         self.linkType = self.modal.$modal.find('fieldset.active').data('linktype');
 
+        if(self.linkType === 'external') {
+          // use backend to convert to resolveuid URL when link is internal
+          var base_url = window.PORTAL_URL || $('body').data('portal-url');
+          $.get(base_url + '/@@make-resolveuid-url', {url: self.getLinkUrl()}, function (href) {
+            self.updateAnchor(href);
+            self.hide();
+          });
+          return;
+        }
         if(self.linkType === 'uploadImage' || self.linkType === 'upload'){
           var patUpload = self.$upload.data().patternUpload;
           if(patUpload.dropzone.files.length > 0){
@@ -35878,6 +35892,11 @@ define('mockup-patterns-tinymce-url/js/links',[
             $('#tinylink-' + self.linkType, self.modal.$modal).trigger('click');
           } else if (src) {
             self.guessImageLink(src);
+          }
+          if (self.linkType !== 'externalImage') {
+            // hide external image unless it's in use
+            $('.autotoc-level-1:last', self.modal.$modal).hide();
+            $('fieldset.externalImage', self.modal.$modal).hide();
           }
           var className = self.dom.getAttrib(self.imgElm, 'class');
           var klasses = className.split(' ');
@@ -72272,7 +72291,7 @@ define('mockup-patterns-tinymce',[
         imageAlign: _t('Align'),
         scale: _t('Size'),
         alt: _t('Alternative Text'),
-        insertImageHelp: _t('Specify an image. It can be on this site already (Internal Image), an image you upload (Upload), or from an external site (External Image).'),
+        insertImageHelp: _t('Specify an image. It can be on this site already ("Internal Image") or an image you upload ("Upload").'),
         internalImage: _t('Internal Image'),
         externalImage: _t('External Image'),
         externalImageText: _t('External Image URL (can be relative within this site or absolute if it starts with http:// or https://)'),
@@ -72760,5 +72779,5 @@ require([
   'use strict';
 });
 
-define("/home/_thet/data/dev/plone/buildout.coredev/src/plone.staticresources/src/plone/staticresources/static/plone-tinymce.js", function(){});
+define("/Users/alecmitchell/Development/bundles/mountaineers/src/plone.staticresources/src/plone/staticresources/static/plone-tinymce.js", function(){});
 

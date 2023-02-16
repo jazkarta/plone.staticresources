@@ -16233,5 +16233,5 @@ require([
   'use strict';
 });
 
-define("/home/_thet/data/dev/plone/buildout.coredev/src/plone.staticresources/src/plone/staticresources/static/plone-datatables.js", function(){});
+define("/Users/alecmitchell/Development/bundles/mountaineers/src/plone.staticresources/src/plone/staticresources/static/plone-datatables.js", function(){});
 
