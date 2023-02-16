@@ -1,46 +1,30 @@
 <div>
   <div class="linkModal">
     <h1><%- insertHeading %></h1>
-    <% if(_.contains(linkTypes, 'upload')){ %>
-    <p class="info"><%- insertLinkHelp %></p>
-    <% } %>
+    <p class="info">
+      Specify the object for the link using one of these tabs.<br><br>
+    </p>
 
     <div class="linkTypes pat-autotoc autotabs"
          data-pat-autotoc="section:fieldset;levels:legend;IDPrefix:tinymce-autotoc-">
 
-      <% if(_.contains(linkTypes, 'internal')){ %>
-      <fieldset class="linkType internal" data-linkType="internal">
-        <legend id="tinylink-internal"><%- internal %></legend>
-        <div>
-          <div class="form-group main">
-            <!-- this gives the name to the "linkType" -->
-            <input type="text" name="internal" />
-          </div>
-        </div>
-      </fieldset>
-      <% } %>
-
-      <% if(_.contains(linkTypes, 'upload')){ %>
-      <fieldset class="linkType upload" data-linkType="upload">
-        <legend id="tinylink-upload"><%- uploadText %></legend>
-        <div class="uploadify-me"></div>
-      </fieldset>
-      <% } %>
-
-      <% if(_.contains(linkTypes, 'external')){ %>
       <fieldset class="linkType external" data-linkType="external">
-        <legend id="tinylink-external"><%- external %></legend>
+        <legend id="tinylink-external">URL</legend>
         <div class="form-group main">
+          <p class="info">
+            Enter a mountaineers.org URL (e.g. https://www.mountaineers.org/volunteers) or a URL for an external website (e.g. https://plone.org/).
+          </p>
           <label for="external"><%- externalText %></label>
           <input type="text" name="external" />
         </div>
       </fieldset>
-      <% } %>
 
-      <% if(_.contains(linkTypes, 'email')){ %>
       <fieldset class="linkType email" data-linkType="email">
-        <legend id="tinylink-email"><%- emailText %></legend>
+        <legend id="tinylink-email">Email</legend>
         <div class="form-inline">
+          <p class="info">
+            Enter an email address and optionally a subject.
+          </p>
           <div class="form-group main">
             <label><%- emailText %></label>
             <input type="text" name="email" />
@@ -51,27 +35,40 @@
           </div>
         </div>
       </fieldset>
-      <% } %>
 
-      <% if(_.contains(linkTypes, 'anchor')){ %>
-      <fieldset class="linkType anchor" data-linkType="anchor">
-        <legend id="tinylink-anchor"><%- anchor %></legend>
+      <fieldset class="linkType internal" data-linkType="internal">
+        <legend id="tinylink-internal">Browse</legend>
         <div>
           <div class="form-group main">
-            <label><%- anchorLabel %></label>
+            <p class="info">
+              Navigate to/search for an item on this site.
+            </p>
+            <!-- this gives the name to the "linkType" -->
+            <input type="text" name="internal" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="linkType anchor" data-linkType="anchor">
+        <legend id="tinylink-anchor">Anchor (advanced)</legend>
+        <div>
+          <div class="form-group main">
+            <p class="info">
+              Choose an anchor from the list.
+            </p>
+            <label>Select an anchor</label>
             <div class="input-wrapper">
               <select name="anchor" class="pat-select2" data-pat-select2="width:500px" />
             </div>
           </div>
         </div>
       </fieldset>
-      <% } %>
 
     </div><!-- / tabs -->
 
     <div class="common-controls">
       <div class="form-group">
-        <label><%- target %></label>
+        <label>Target</label>
         <select name="target">
           <% _.each(targetList, function(target){ %>
             <option value="<%- target.value %>"><%- target.text %></option>
@@ -81,6 +78,7 @@
       <div class="form-group">
         <label><%- titleText %></label>
         <input type="text" name="title" />
+        <div>Text entered here appears in a “tooltip”-style box near the link when the mouse is positioned on the link.</div>
       </div>
     </div>
 
