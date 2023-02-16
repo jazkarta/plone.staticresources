@@ -13,13 +13,13 @@
     <value key="last_compilation">2023-02-15 14:15:00</value>
   </records>
   <records prefix="plone.bundles/plone-editor-tools" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2022-04-28 22:18:00</value>
+    <value key="last_compilation">2023-02-16 22:18:00</value>
   </records>
   <records prefix="plone.bundles/plone-tinymce" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2020-10-28 14:00:00</value>
+    <value key="last_compilation">2023-02-16 14:00:00</value>
   </records>
   <records prefix="plone.bundles/plone-datatables" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2020-10-28 14:00:00</value>
+    <value key="last_compilation">2023-02-16 14:00:00</value>
   </records>
   <records prefix="plone.bundles/resourceregistry" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="last_compilation">2020-10-28 14:00:00</value>
