@@ -4700,10 +4700,11 @@ define('mockup-patterns-select2',[
   'jquery',
   'pat-base',
   'mockup-utils',
+  'underscore',
   'select2',
   'jquery.event.drag',
   'jquery.event.drop'
-], function($, Base, utils) {
+], function($, Base, utils, _) {
   'use strict';
 
   var Select2 = Base.extend({
@@ -4751,7 +4752,7 @@ define('mockup-patterns-select2',[
             if (seldefaults[this]) {
               text = seldefaults[this];
             }
-            data.push({id: utils.removeHTML(this), text: utils.removeHTML(text)});
+            data.push({id: utils.removeHTML(this), text: _.unescape(utils.removeHTML(text))});
           });
           callback(data);
         };
@@ -4769,7 +4770,7 @@ define('mockup-patterns-select2',[
 
       if (self.options.tags && !self.options.allowNewItems) {
         self.options.data = $.map (self.options.tags, function (value, i) {
-          return { id: value, text: value };
+          return { id: value, text:  _.unescape(value) };
         });
         self.options.multiple = true;
         delete self.options.tags;
@@ -4895,7 +4896,7 @@ define('mockup-patterns-select2',[
             var data = [], value = $el.val();
             $(value.split(self.options.separator)).each(function () {
               var val = utils.removeHTML(this);
-              data.push({id: val, text: val});
+              data.push({id: val, text:  _.unescape(val)});
             });
             callback(data);
           };
@@ -4924,10 +4925,13 @@ define('mockup-patterns-select2',[
               var haveResult = queryTerm === '' || $.inArray(queryTerm, dataIds) >= 0;
               if (self.options.allowNewItems && !haveResult) {
                 queryTerm = utils.removeHTML(queryTerm);
-                results.push({id: queryTerm, text: queryTerm});
+                results.push({id: queryTerm, text:  _.unescape(queryTerm)});
               }
 
               $.each(data.results, function(i, item) {
+                if (item && item.text) {
+                  item.text = _.unescape(item.text);
+                }
                 results.push(item);
               });
             }
@@ -6053,19 +6057,19 @@ define('text',['module'], function (module) {
 });
 
 
-define('text!mockup-patterns-relateditems-url/templates/breadcrumb.xml',[],function () { return '<span class="separator">/<span>\n<a href="<%- path %>" class="crumb"><%- text %></a>\n';});
+define('text!mockup-patterns-relateditems-url/templates/breadcrumb.xml',[],function () { return '<span class="separator">/<span>\n<a href="<%- path %>" class="crumb"><%- _.unescape(text) %></a>\n';});
 
 
-define('text!mockup-patterns-relateditems-url/templates/favorite.xml',[],function () { return '<li><a href="<%- path %>" class="fav" aria-labelledby="blip"><%- title %></a></li>\n';});
+define('text!mockup-patterns-relateditems-url/templates/favorite.xml',[],function () { return '<li><a href="<%- path %>" class="fav" aria-labelledby="blip"><%- _.unescape(title) %></a></li>\n';});
 
 
-define('text!mockup-patterns-relateditems-url/templates/recentlyused.xml',[],function () { return '<li class="pattern-relateditems-recentlyused">\n  <a class="pattern-relateditems-recentlyused-select" data-uid="<%- UID %>">\n    <div class="pattern-relateditems-recentlyused-info">\n      <span\n        class="pattern-relateditems-recentlyused-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n        title="<%- portal_type %>">\n        <%- Title %>\n      </span>\n      <span class="pattern-relateditems-recentlyused-path"><%- path %></span>\n    </div>\n    <% if (getURL && (getIcon || portal_type === "Image")) { %>\n      <div class="pattern-relateditems-recentlyused-image">\n        <img src="<%- getURL %>/@@images/image/tile" />\n      </div>\n    <% } %>\n  </a>\n</li>\n';});
+define('text!mockup-patterns-relateditems-url/templates/recentlyused.xml',[],function () { return '<li class="pattern-relateditems-recentlyused">\n  <a class="pattern-relateditems-recentlyused-select" data-uid="<%- UID %>">\n    <div class="pattern-relateditems-recentlyused-info">\n      <span\n        class="pattern-relateditems-recentlyused-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n        title="<%- portal_type %>">\n        <%- _.unescape(Title) %>\n      </span>\n      <span class="pattern-relateditems-recentlyused-path"><%- path %></span>\n    </div>\n    <% if (getURL && (getIcon || portal_type === "Image")) { %>\n      <div class="pattern-relateditems-recentlyused-image">\n        <img src="<%- getURL %>/@@images/image/tile" />\n      </div>\n    <% } %>\n  </a>\n</li>\n';});
 
 
-define('text!mockup-patterns-relateditems-url/templates/result.xml',[],function () { return '<div class="pattern-relateditems-result <%- oneLevelUp ? \'one-level-up\' : \'\' %>">\n  <div class="pattern-relateditems-result-browse-wrapper">\n  <% if (!oneLevelUp) { %>\n    <a\n      class="pattern-relateditems-result-select<%- selectable ? \' selectable\' : \'\' %><%- oneLevelUp ? \' one-level-up\' : \'\' %>"\n      data-path="<%- path %>">\n  <% } %>\n      <div class="pattern-relateditems-result-info">\n        <span\n          class="pattern-relateditems-result-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n          title="<%- portal_type %>">\n          <%- Title %>\n        </span>\n        <span class="pattern-relateditems-result-path"><%- oneLevelUp ? currentPath : path %></span>\n      </div>\n      <% if (is_folderish) { %>\n        <a\n          class="pattern-relateditems-result-browse"\n          data-path="<%- path %>"\n          title="<%- oneLevelUp ? one_level_up : open_folder %>">\n          <span class="<%- oneLevelUp ? \'icon-left-circle\' : \'icon-right-circle\' %>"></span>\n        </a>\n      <% } %>\n  <% if (!oneLevelUp) { %>\n    </a>\n  <% } %>\n  </div>\n  <% if (getURL && (getIcon || portal_type === "Image")) { %>\n    <% if (!oneLevelUp) { %>\n    <a\n      class="pattern-relateditems-result-select<%- selectable ? \' selectable\' : \'\' %><%- oneLevelUp ? \' one-level-up\' : \'\' %>"\n      data-path="<%- path %>">\n    <% } %>\n    <div class="pattern-relateditems-result-image">\n      <img src="<%- getURL %>/@@images/image/thumb" />\n    </div>\n    <% if (!oneLevelUp) { %>\n    </a>\n    <% } %>\n  <% } %>\n</div>\n';});
+define('text!mockup-patterns-relateditems-url/templates/result.xml',[],function () { return '<div class="pattern-relateditems-result <%- oneLevelUp ? \'one-level-up\' : \'\' %>">\n  <div class="pattern-relateditems-result-browse-wrapper">\n  <% if (!oneLevelUp) { %>\n    <a\n      class="pattern-relateditems-result-select<%- selectable ? \' selectable\' : \'\' %><%- oneLevelUp ? \' one-level-up\' : \'\' %>"\n      data-path="<%- path %>">\n  <% } %>\n      <div class="pattern-relateditems-result-info">\n        <span\n          class="pattern-relateditems-result-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n          title="<%- portal_type %>">\n          <%- _.unescape(Title) %>\n        </span>\n        <span class="pattern-relateditems-result-path"><%- oneLevelUp ? currentPath : path %></span>\n      </div>\n      <% if (is_folderish) { %>\n        <a\n          class="pattern-relateditems-result-browse"\n          data-path="<%- path %>"\n          title="<%- oneLevelUp ? one_level_up : open_folder %>">\n          <span class="<%- oneLevelUp ? \'icon-left-circle\' : \'icon-right-circle\' %>"></span>\n        </a>\n      <% } %>\n  <% if (!oneLevelUp) { %>\n    </a>\n  <% } %>\n  </div>\n  <% if (getURL && (getIcon || portal_type === "Image")) { %>\n    <% if (!oneLevelUp) { %>\n    <a\n      class="pattern-relateditems-result-select<%- selectable ? \' selectable\' : \'\' %><%- oneLevelUp ? \' one-level-up\' : \'\' %>"\n      data-path="<%- path %>">\n    <% } %>\n    <div class="pattern-relateditems-result-image">\n      <img src="<%- getURL %>/@@images/image/thumb" />\n    </div>\n    <% if (!oneLevelUp) { %>\n    </a>\n    <% } %>\n  <% } %>\n</div>\n';});
 
 
-define('text!mockup-patterns-relateditems-url/templates/selection.xml',[],function () { return '<div class="pattern-relateditems-item">\n  <div class="pattern-relateditems-result-info">\n    <span\n      class="pattern-relateditems-item-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n      title="<%- portal_type %>">\n      <%- Title %>\n    </span>\n    <span class="pattern-relateditems-item-path"><%- path %></span>\n  </div>\n  <% if (getURL && (getIcon || portal_type === "Image")) { %>\n    <div class="pattern-relateditems-item-image">\n      <img src="<%- getURL %>/@@images/image/thumb" />\n    </div>\n  <% } %>\n</div>\n';});
+define('text!mockup-patterns-relateditems-url/templates/selection.xml',[],function () { return '<div class="pattern-relateditems-item">\n  <div class="pattern-relateditems-result-info">\n    <span\n      class="pattern-relateditems-item-title <%- portal_type ? \'contenttype-\' + portal_type.toLowerCase() : \'\' %> <%- review_state ? \'state-\' + review_state : \'\' %>"\n      title="<%- portal_type %>">\n      <%- _.unescape(Title) %>\n    </span>\n    <span class="pattern-relateditems-item-path"><%- path %></span>\n  </div>\n  <% if (getURL && (getIcon || portal_type === "Image")) { %>\n    <div class="pattern-relateditems-item-image">\n      <img src="<%- getURL %>/@@images/image/thumb" />\n    </div>\n  <% } %>\n</div>\n';});
 
 
 define('text!mockup-patterns-relateditems-url/templates/toolbar.xml',[],function () { return '<% if (mode!==\'auto\') { %>\n<div class="btn-group mode-selector" role="group">\n  <button type="button" class="mode search btn <% if (mode==\'search\') { %>btn-primary<% } else {%>btn-default<% } %>"><%- searchModeText %></button>\n  <button type="button" class="mode browse btn <% if (mode==\'browse\') { %>btn-primary<% } else {%>btn-default<% } %>"><%- browseModeText %></button>\n</div>\n<% } %>\n<div class="path-wrapper">\n  <span class="pattern-relateditems-path-label"><%- searchText %></span>\n  <a class="crumb" href="/"><span class="glyphicon glyphicon-home"/></a>\n  <%= items %>\n</div>\n<div class="controls pull-right">\n\n  <% if (recentlyUsedItems) { %>\n  <div class="recentlyUsed dropdown pull-right">\n    <button type="button" class="recentlyUsed dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n      <span class="glyphicon glyphicon-time"/>\n      <%- recentlyUsedText %>\n      <span class="caret"/>\n    </button>\n    <ul class="dropdown-menu">\n      <%= recentlyUsedItems %>\n    </ul>\n  </div>\n  <% } %>\n\n  <% if (favorites.length > 0) { %>\n  <div class="favorites dropdown pull-right">\n    <button type="button" class="favorites dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n      <span class="glyphicon glyphicon-star"/>\n      <%- favText %>\n      <span class="caret"/>\n    </button>\n    <ul class="dropdown-menu">\n      <%= favItems %>\n    </ul>\n  </div>\n  <% } %>\n</div>\n';});
@@ -8388,7 +8392,7 @@ define('mockup-patterns-structure-url/js/views/actionmenu',[
 });
 
 
-define('text!mockup-patterns-structure-url/templates/tablerow.xml',[],function () { return '<td class="selection" data-order="<%- attributes[\'_sort\'] %>"><label for="select<%- attributes[\'_sort\'] %>InputCheckbox" class="hiddenStructure" aria-label="<%- _t(\'Select\') %>"><%- _t(\'Select\') %></label><input id="select<%- attributes[\'_sort\'] %>InputCheckbox" <% if(selected){ %> checked="checked" <% } %> type="checkbox"/></td>\n\n<td class="title">\n  <div class="pull-left">\n    <a href="<%- viewURL %>"\n        class="manage state-<%- review_state %> contenttype-<%- contenttype %>"\n        title="<%- portal_type %>">\n        <% if(attributes["getMimeIcon"] && contenttype == \'file\'){ %>\n           <img class="mime-icon" src="<%- getMimeIcon %>"> <% } %>\n      <% if(Title){ %>\n        <%- Title %>\n      <% } else { %>\n        <em><%- id %></em>\n      <% } %>\n    </a>\n    <% if(expired){ %>\n      <span class="plone-item-expired"><%- _t(\'Expired\') %></span>\n    <% } %>\n    <% if(ineffective){ %>\n      <span class="plone-item-ineffective"><%- _t(\'Before publishing date\') %></span>\n    <% } %>\n    <% if(activeColumns.indexOf(\'Description\') !== -1 && _.has(availableColumns, \'Description\') && Description) { %>\n    <p class="Description">\n      <small>\n        <%- Description %>\n      </small>\n    </p>\n    <% } %>\n  </div>\n  <% if(attributes["getIcon"] && thumb_scale) { %>\n    <img class="thumb-<%- thumb_scale %> pull-right" src="<%- getURL %>/@@images/image/<%- thumb_scale %>">\n  <% } %>\n</td>\n\n<% _.each(activeColumns, function(column) { %>\n  <% if(column !== \'Description\' && _.has(availableColumns, column)) { %>\n    <td class="<%- column %>" data-order="<%- attributes[column] %>"><%- attributes[column] %></td>\n  <% } %>\n<% }); %>\n\n<td class="actionmenu-container"></td>\n';});
+define('text!mockup-patterns-structure-url/templates/tablerow.xml',[],function () { return '<td class="selection" data-order="<%- attributes[\'_sort\'] %>"><label for="select<%- attributes[\'_sort\'] %>InputCheckbox" class="hiddenStructure" aria-label="<%- _t(\'Select\') %>"><%- _t(\'Select\') %></label><input id="select<%- attributes[\'_sort\'] %>InputCheckbox" <% if(selected){ %> checked="checked" <% } %> type="checkbox"/></td>\n\n<td class="title">\n  <div class="pull-left">\n    <a href="<%- viewURL %>"\n        class="manage state-<%- review_state %> contenttype-<%- contenttype %>"\n        title="<%- portal_type %>">\n        <% if(attributes["getMimeIcon"] && contenttype == \'file\'){ %>\n           <img class="mime-icon" src="<%- getMimeIcon %>"> <% } %>\n      <% if(Title){ %>\n        <%- _.unescape(Title) %>\n      <% } else { %>\n        <em><%- id %></em>\n      <% } %>\n    </a>\n    <% if(expired){ %>\n      <span class="plone-item-expired"><%- _t(\'Expired\') %></span>\n    <% } %>\n    <% if(ineffective){ %>\n      <span class="plone-item-ineffective"><%- _t(\'Before publishing date\') %></span>\n    <% } %>\n    <% if(activeColumns.indexOf(\'Description\') !== -1 && _.has(availableColumns, \'Description\') && Description) { %>\n    <p class="Description">\n      <small>\n        <%- _.unescape(Description) %>\n      </small>\n    </p>\n    <% } %>\n  </div>\n  <% if(attributes["getIcon"] && thumb_scale) { %>\n    <img class="thumb-<%- thumb_scale %> pull-right" src="<%- getURL %>/@@images/image/<%- thumb_scale %>">\n  <% } %>\n</td>\n\n<% _.each(activeColumns, function(column) { %>\n  <% if(column !== \'Description\' && _.has(availableColumns, column)) { %>\n    <td class="<%- column %>" data-order="<%- attributes[column] %>"><%- attributes[column] %></td>\n  <% } %>\n<% }); %>\n\n<td class="actionmenu-container"></td>\n';});
 
 define('mockup-patterns-structure-url/js/views/tablerow',[
   'jquery',
@@ -25525,7 +25529,7 @@ define('mockup-ui-url/views/popover',[
 });
 
 
-define('text!mockup-patterns-structure-url/templates/selection_item.xml',[],function () { return '<span class="selected-item">\n  <a href="#" data-uid="<%- UID %>" title="remove" class="remove">\n    <span class="glyphicon glyphicon-remove-circle"></span>\n  </a>\n  <%- Title %>\n</span>\n';});
+define('text!mockup-patterns-structure-url/templates/selection_item.xml',[],function () { return '<span class="selected-item">\n  <a href="#" data-uid="<%- UID %>" title="remove" class="remove">\n    <span class="glyphicon glyphicon-remove-circle"></span>\n  </a>\n  <%-  _.unescape(Title) %>\n</span>\n';});
 
 define('mockup-patterns-structure-url/js/views/selectionwell',[
   'jquery',

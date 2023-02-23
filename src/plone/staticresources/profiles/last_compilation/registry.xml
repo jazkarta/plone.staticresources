@@ -4,22 +4,22 @@
     <value key="last_compilation">2020-10-28 14:00:00</value>
   </records>
   <records prefix="plone.bundles/plone" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2023-02-16 22:20:00</value>
+    <value key="last_compilation">2023-02-22 22:20:00</value>
   </records>
   <records prefix="plone.bundles/plone-moment" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="last_compilation">2020-10-28 14:00:00</value>
   </records>
   <records prefix="plone.bundles/plone-logged-in" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2023-02-16 22:20:00</value>
+    <value key="last_compilation">2023-02-22 22:20:00</value>
   </records>
   <records prefix="plone.bundles/plone-editor-tools" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2023-02-16 22:20:00</value>
+    <value key="last_compilation">2023-02-22 22:20:00</value>
   </records>
   <records prefix="plone.bundles/plone-tinymce" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2023-02-16 22:20:00</value>
+    <value key="last_compilation">2023-02-22 22:20:00</value>
   </records>
   <records prefix="plone.bundles/plone-datatables" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="last_compilation">2023-02-16 22:20:00</value>
+    <value key="last_compilation">2023-02-22 22:20:00</value>
   </records>
   <records prefix="plone.bundles/resourceregistry" interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="last_compilation">2020-10-28 14:00:00</value>

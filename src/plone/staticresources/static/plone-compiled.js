@@ -289,7 +289,18 @@ define('mockup-utils',[
         criterias = self.options.baseCriteria.slice(0);
       }
       if (term) {
-        term += '*';
+        term = decodeURIComponent(term);
+        // Don't submit queries with unmatched double quotes
+        var quote_count = (term.match(/"/g) || []).length;
+        if (quote_count && (quote_count % 2) == 1) {
+          throw new Error('incomplete query');
+        }
+        // Don't add wildcards to strings ending with quotes or spaces
+        var last_char = term[term.length - 1];
+        if (last_char !== '"' && last_char !== ' ') {
+          term += '*';
+        }
+        term = JSON.stringify(term);
         criterias.push({
           i: self.options.searchParam,
           o: 'plone.app.querystring.operation.string.contains',

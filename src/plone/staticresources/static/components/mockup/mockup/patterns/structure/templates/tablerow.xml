@@ -8,7 +8,7 @@
         <% if(attributes["getMimeIcon"] && contenttype == 'file'){ %>
            <img class="mime-icon" src="<%- getMimeIcon %>"> <% } %>
       <% if(Title){ %>
-        <%- Title %>
+        <%- _.unescape(Title) %>
       <% } else { %>
         <em><%- id %></em>
       <% } %>
@@ -22,7 +22,7 @@
     <% if(activeColumns.indexOf('Description') !== -1 && _.has(availableColumns, 'Description') && Description) { %>
     <p class="Description">
       <small>
-        <%- Description %>
+        <%- _.unescape(Description) %>
       </small>
     </p>
     <% } %>

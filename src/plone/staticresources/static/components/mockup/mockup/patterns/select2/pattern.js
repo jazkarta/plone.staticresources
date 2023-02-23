@@ -69,10 +69,11 @@ define([
   'jquery',
   'pat-base',
   'mockup-utils',
+  'underscore',
   'select2',
   'jquery.event.drag',
   'jquery.event.drop'
-], function($, Base, utils) {
+], function($, Base, utils, _) {
   'use strict';
 
   var Select2 = Base.extend({
@@ -120,7 +121,7 @@ define([
             if (seldefaults[this]) {
               text = seldefaults[this];
             }
-            data.push({id: utils.removeHTML(this), text: utils.removeHTML(text)});
+            data.push({id: utils.removeHTML(this), text: _.unescape(utils.removeHTML(text))});
           });
           callback(data);
         };
@@ -138,7 +139,7 @@ define([
 
       if (self.options.tags && !self.options.allowNewItems) {
         self.options.data = $.map (self.options.tags, function (value, i) {
-          return { id: value, text: value };
+          return { id: value, text:  _.unescape(value) };
         });
         self.options.multiple = true;
         delete self.options.tags;
@@ -264,7 +265,7 @@ define([
             var data = [], value = $el.val();
             $(value.split(self.options.separator)).each(function () {
               var val = utils.removeHTML(this);
-              data.push({id: val, text: val});
+              data.push({id: val, text:  _.unescape(val)});
             });
             callback(data);
           };
@@ -293,10 +294,13 @@ define([
               var haveResult = queryTerm === '' || $.inArray(queryTerm, dataIds) >= 0;
               if (self.options.allowNewItems && !haveResult) {
                 queryTerm = utils.removeHTML(queryTerm);
-                results.push({id: queryTerm, text: queryTerm});
+                results.push({id: queryTerm, text:  _.unescape(queryTerm)});
               }
 
               $.each(data.results, function(i, item) {
+                if (item && item.text) {
+                  item.text = _.unescape(item.text);
+                }
                 results.push(item);
               });
             }

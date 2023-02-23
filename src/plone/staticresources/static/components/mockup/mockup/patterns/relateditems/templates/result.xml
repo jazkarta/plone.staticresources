@@ -9,7 +9,7 @@
         <span
           class="pattern-relateditems-result-title <%- portal_type ? 'contenttype-' + portal_type.toLowerCase() : '' %> <%- review_state ? 'state-' + review_state : '' %>"
           title="<%- portal_type %>">
-          <%- Title %>
+          <%- _.unescape(Title) %>
         </span>
         <span class="pattern-relateditems-result-path"><%- oneLevelUp ? currentPath : path %></span>
       </div>

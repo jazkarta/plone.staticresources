@@ -4263,6 +4263,10 @@ raw-body@~1.1.0:
     bytes "1"
     string_decoder "0.10"
 
+"react@https://github.com/reactjs/react-bower.git#v0.10.0":
+  version "0.0.0"
+  resolved "https://github.com/reactjs/react-bower.git#4862309b39ceef32a65c160cd9987eccdfb29c38"
+
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"

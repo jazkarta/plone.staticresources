@@ -21,5 +21,6 @@
   <include file="18.zcml" />
   <include file="19.zcml" />
   <include file="20.zcml" />
+  <include file="21.zcml" />
 
 </configure>

@@ -546,7 +546,7 @@ mkdirp@^0.5.0:
 
 "mockup@https://github.com/jazkarta/mockup.git#mtneers-3.x":
   version "3.2.9"
-  resolved "https://github.com/jazkarta/mockup.git#10e196918d996512bb1e58d8bebe78d5da89d741"
+  resolved "https://github.com/jazkarta/mockup.git#f06a4af7cf82fe1a286a7494a16b6f3f28824fd1"
   dependencies:
     ace-builds "https://github.com/ajaxorg/ace-builds.git#v1.2.6"
     backbone "https://github.com/jashkenas/backbone.git#1.1.2"
