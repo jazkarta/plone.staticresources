@@ -25,6 +25,8 @@ require([
   'mockup-patterns-modal',
   'mockup-patterns-navigationmarker',
   'mockup-patterns-preventdoublesubmit',
+  'mockup-patterns-pickadate',
+  'mockup-patterns-select2',
   'bootstrap-collapse',
   'bootstrap-dropdown',
   'bootstrap-tooltip',
