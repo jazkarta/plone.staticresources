@@ -190,12 +190,12 @@ datatables.net-colreorder@1.4.1, "datatables.net-colreorder@https://github.com/D
     jquery ">=1.7"
 
 datatables.net-dt@^1.10.15:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.13.2.tgz#fae827ad0e8b94d835bf68189ce6f97c79283ae2"
-  integrity sha512-+akHG1Up2xd+HiayCO/u94JhNLsVroLPUWAG5t+UPos4OXwg0LVNEYcmy0noy6xJPOt0fP/SJ6GOmHXCU1Opcg==
+  version "1.13.11"
+  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-1.13.11.tgz#931e01e3fa9ec2f44d7d5ea87e91fb4ffb8eaaae"
+  integrity sha512-4GpS4OFLwIMfhb5UdJh6bEnh0E52jIJOlx7KLKs1pSce/xpHjvcmucbUWNaEndQIpHXtIxmVPoqcDB0ZbiVB+A==
   dependencies:
-    datatables.net ">=1.12.1"
-    jquery ">=1.7"
+    datatables.net "1.13.11"
+    jquery "1.8 - 4"
 
 "datatables.net-fixedcolumns-bs@https://github.com/DataTables/Dist-DataTables-FixedColumns-Bootstrap.git#3.2.3":
   version "3.2.3"
@@ -302,7 +302,7 @@ datatables.net-select@1.2.3, "datatables.net-select@https://github.com/DataTable
     datatables.net "^1.10.15"
     jquery ">=1.7"
 
-datatables.net@1.10.16, datatables.net@>=1.12.1, datatables.net@^1.10.15, "datatables.net@https://github.com/DataTables/Dist-DataTables.git#1.10.16":
+datatables.net@1.10.16, datatables.net@1.13.11, datatables.net@^1.10.15, "datatables.net@https://github.com/DataTables/Dist-DataTables.git#1.10.16":
   version "1.10.16"
   resolved "https://github.com/DataTables/Dist-DataTables.git#795d3f39b73da5bc3656c8ef5425931a55e6ed2e"
   dependencies:
@@ -452,7 +452,7 @@ jqtree@1.4.10, jqtree@>=0.16:
   dependencies:
     jquery ""
 
-jquery@, jquery@1.12.4, jquery@>=1.7, jquery@>=1.7.2, jquery@>=1.9:
+jquery@, jquery@1.12.4, "jquery@1.8 - 4", jquery@>=1.7, jquery@>=1.7.2, jquery@>=1.9:
   version "1.12.4"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
   integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
@@ -546,7 +546,7 @@ mkdirp@^0.5.0:
 
 "mockup@https://github.com/jazkarta/mockup.git#mtneers-3.x":
   version "3.2.9"
-  resolved "https://github.com/jazkarta/mockup.git#830f4ad33c5b456d9583845393f068a87edc4b23"
+  resolved "https://github.com/jazkarta/mockup.git#4fc03c1932d04c8d1a46878ef2bf4d3400b445cf"
   dependencies:
     ace-builds "https://github.com/ajaxorg/ace-builds.git#v1.2.6"
     backbone "https://github.com/jashkenas/backbone.git#1.1.2"

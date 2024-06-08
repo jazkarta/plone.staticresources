@@ -31161,6 +31161,13 @@ define('mockup-patterns-select2',[
           return 'select2-option-' + ob.id.toLowerCase().replace(/[ \:\)\(\[\]\{\}\_\+\=\&\*\%\#]/g, '-');
         }
       };
+      /* Select2 widget automatically escapes any html markup. We want to
+       * preserve HTML entities for ampersand and quote. */
+      self.options.escapeMarkup = function (text) {
+        var escaped = window.Select2.util.escapeMarkup(text);
+        escaped = escaped.replace('&amp;', '&').replace('&quot;', '"');
+        return escaped;
+      }
 
       function callback(action, e) {
         if (!!action) {
@@ -72791,5 +72798,5 @@ require([
   'use strict';
 });
 
-define("/Users/alecmitchell/Development/bundles/mountaineers/src/plone.staticresources/src/plone/staticresources/static/plone-tinymce.js", function(){});
+define("/Users/alecmitchell/Development/bundles/mountaineers-py3/src/plone.staticresources/src/plone/staticresources/static/plone-tinymce.js", function(){});
 

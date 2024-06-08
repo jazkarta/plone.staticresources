@@ -212,6 +212,13 @@ define([
           return 'select2-option-' + ob.id.toLowerCase().replace(/[ \:\)\(\[\]\{\}\_\+\=\&\*\%\#]/g, '-');
         }
       };
+      /* Select2 widget automatically escapes any html markup. We want to
+       * preserve HTML entities for ampersand and quote. */
+      self.options.escapeMarkup = function (text) {
+        var escaped = window.Select2.util.escapeMarkup(text);
+        escaped = escaped.replace('&amp;', '&').replace('&quot;', '"');
+        return escaped;
+      }
 
       function callback(action, e) {
         if (!!action) {
